@@ -86,7 +86,7 @@
 \newlength{\itemseparation}
 \setlength\itemseparation{0.25em}
 
-\title{High-energy lepton and photon propagation with the simulation framework PROPOSAL}
+\title{High-energy lepton and photon simulations with the framework PROPOSAL}
 \author{Jean-Marco Alameddine$^{1}$, Pascal Gutjahr$^{1}$}
 \institute[ETH]{$^{1}$TU Dortmund University, Otto-Hahn-Str. 4a, 44227 Dortmund, Germany}
 \date{4. Juli 2015}
@@ -112,12 +112,17 @@
       \setlength\itemsep{\itemseparation}
       \item[$\rightarrow$] The underlying tools need to be both precise and performant
     \end{itemize}
-    \item PROPOSAL is a simulation framework, providing 3D Monte Carlo simulations of high-energy electrons, positrons, muons, taus and photons
+    \item PROPOSAL is a simulation framework, providing 3D Monte Carlo simulations of high-energy electrons, positrons, muons, taus and photons \cite{koehne2013proposal, dunsch_2018_proposal_improvements}
     \item Different parametrizations of physical processes, including up-to-date parametrizations, are available
     \item High-performance and high-precision simulations, optimized for large-scale particle propagation
+    \item PROPOSAL is actively maintained. Recent updates include:
+    \begin{itemize}
+      \item[$\rightarrow$] Improvements in the simulation of photons by including photoproduction, photoeffect, and muon pair production (relevant for low-energy and very-high-energy photons)
+      \item[$\rightarrow$] Code restructuring and modularization, so PROPOSAL can be used as a framework by providing individual modules
+    \end{itemize}
   \end{itemize}
 
-      \vspace{1em}
+      \vspace{0.8em}
               \begin{center}
                 \colorbox{light-gray}{
             \begin{minipage}[ht]{0.75\linewidth}
@@ -185,16 +190,106 @@
     \end{column}%    
   \end{columns}%
 
-
   \begin{columns}[onlytextwidth]%
-          \begin{block}[equal height group=J]{Simulation of Deflection Uncertainties on Direction Reconstructions of Muons Using PROPOSAL}%
+    \begin{column}{\textwidth}%
+    \begin{block}[equal height group=J]{Simulation of Deflection Uncertainties on Direction Reconstructions of Muons Using PROPOSAL}%
+      \begin{columns}[onlytextwidth]
+        \begin{column}{0.33\textwidth}
 
+        There are two types of scattering interactions for muon propagation:
+      \vspace{0.5em}
+
+        \textbf{1. Multiple scattering:} (figure adapted from \cite{dunsch})
+
+        \begin{figure}
+          \includegraphics[width=0.7\linewidth, height=.4\textheight, keepaspectratio]{plots/multiple_scattering_dunsch.png}
+        \end{figure}
+
+        \begin{itemize}
+          \item[$\rightarrow$] Described by Molière theory or a Gaussian approximation
+          \item[$\rightarrow$] Relevant contribution, especially at low energies
+        \end{itemize}
+
+      \vspace{0.5em}
+
+        \textbf{2. Stochastic deflections:}
+
+        \begin{figure}
+            \begin{tikzpicture}[scale=2.5, every node/.style={scale=1.0}]
+                \centering
+
+                \coordinate (start) at (-1,0);
+                \coordinate (kink) at (1.8, 0);
+                \coordinate (end) at (4.5, 0.8);
+                \coordinate (continue) at (4.5, 0);
+
+
+
+                \draw [black, line width=0.6mm] (start) -- node[above] {$\mu$}  (kink);
+                \draw [->, black, line width=0.6mm] (kink) -- node[above] {$\mu^\prime$}  (end);
+                \draw [black, dashed, line width=0.2mm] (kink) -- (continue);
+
+                \fill [red] (kink) circle (0.15) node[label=below: $\substack{\text{stochastic} \\ \text{interaction}}$]{};
+
+                \pic [draw, "$\theta$", angle eccentricity=0.7, angle radius=3.3cm] {angle = continue--kink--end};
+
+            \end{tikzpicture}
+            %\caption*{Visualization of stochastic muon deflections.}
+        \end{figure} 
+
+        \begin{itemize}
+          \item[$\rightarrow$] Deflection of initial particle in individual interaction
+          \item[$\rightarrow$] Might be a contribution for highly stochastic energy losses
+        \end{itemize}
+
+
+          \end{column}
+          \begin{column}{0.33\textwidth}  
+
+
+            \textbf{Results from [arXiv:2208.11902] (\cite{gutjahr2022}):}
+            \vspace{0.5em}
+
+            \begin{itemize}
+              \setlength\itemsep{\itemseparation}
+              \item Motivation: Directional reconstruction of muons is essential for applications such as neutrino astronomy or muon tomography
+              \item In this paper, we have analyzed muon deflections based on simulations with PROPOSAL
+              \item Comparisons of PROPOSAL simulations with \textsc{Geant4}, MUSIC, and experimental measurements show a good agreement
+              \item We performed simulations of muons with idential initial energies, and plotted the accumulated muon deflections for different final energies (see Figure on the right)
+              %\begin{itemize}
+              %  \item[$\rightarrow$] The accumulated deflection primarily depends in the final muon energy and is independent of the initial energy
+              %  \item[$\rightarrow$] Compared to the angular resolutions of current and future neutrino telescopes, we can see a potential impact of muon deflections on the angular resolution of KM3NeT at energies $E_\text{f} \leq \SI{1}{\tera\electronvolt}$
+              %\end{itemize}
+            \end{itemize}
+            \vspace{0.5em}
+
+              \begin{center}
+                \colorbox{tuYellow}{
+                  \begin{minipage}[ht]{0.85\linewidth}
+                    \begin{itemize}
+                    \item[$\rightarrow$] The accumulated deflection primarily depends on the final muon energy and is independent of the initial energy
+                    \item[$\rightarrow$] Compared to the angular resolutions of current and future neutrino telescopes, we can see a potential impact of muon deflections on the angular resolution of KM3NeT at energies $E_\text{f} \leq \SI{1}{\tera\electronvolt}$
+                  \end{itemize}
+                  \end{minipage}
+                }
+              \end{center}
+
+
+           \end{column}
+          \begin{column}{0.33\textwidth}
             \begin{figure}
-              \includegraphics[width=0.3\linewidth, height=.4\textheight, keepaspectratio]{plots/fit_median_defl_cut_10percent_only_poly_new_resolution_rescale_no_icecube_paper_final_all.pdf}
+              \includegraphics[width=0.9\linewidth, height=.4\textheight, keepaspectratio]{plots/fit_median_defl_cut_10percent_only_poly_new_resolution_rescale_no_icecube_paper_final_all.pdf}
+              \caption*{Median of the accumulated deflection $\theta_\text{acc}$ with a $\SI{99}{\percent}$ central interval for four different initial muon energies $E_\text{i}$. Simulations in ice.}
             \end{figure}
+          \end{column}
+      \end{columns}
 
-          \end{block}
+
+
+    \end{block}
+    \end{column}%
   \end{columns}%
+
   \begin{columns}[onlytextwidth]%
     \begin{column}{\thirdtextwidth}%
       \begin{block}[equal height group=B]{Application: CORSIKA~8}%
@@ -233,7 +328,7 @@
       \begin{block}[equal height group=B]{Application: Neutrino telescopes}%
         \begin{itemize}
           \setlength\itemsep{\itemseparation}
-          \item PROPOSAL is used by neutrino telescopes, for example in the IceCube Neutrino observatory or in RNO-G
+          \item PROPOSAL is used by neutrino telescopes, for example in the IceCube Neutrino observatory or in the software framework NuRadioMC
           \item Simulation of muon and tau energy losses in ice
           \begin{itemize}
             \setlength\itemsep{\itemseparation}
@@ -328,13 +423,22 @@
       \begin{block}[equal height group=Z]{Contact}%
         \begin{center}
           \begin{figure}[ht]
-            \begin{minipage}[ht]{0.75\linewidth}
-              \textbf{Find the PROPOSAL repository under:}\\ \url{github.com/tudo-astroparticlephysics/PROPOSAL} \vspace{0.5em}\\
-              \textbf{Contact via mail:}\\ \href{mailto:me@jean-marco.alameddine@tu-dortmund.de}{jean-marco.alameddine@tu-dortmund.de} 
+            \begin{minipage}[ht]{0.5\linewidth}
+              \textbf{Contact via mail:}
+
+              \vspace{0.25em}
+              \href{mailto:me@jean-marco.alameddine@tu-dortmund.de}{jean-marco.alameddine@tu-dortmund.de} 
+              \\ \href{mailto:me@pascal.gutjahr@tu-dortmund.de}{pascal.gutjahr@tu-dortmund.de} 
             \end{minipage}
             \begin{minipage}[ht]{0.24\linewidth}
               \centering
-                \includegraphics[width=0.66\linewidth, valign=t]{plots/qr_proposal.png}
+                \includegraphics[width=0.61\linewidth, valign=t]{plots/ich.png}
+                \caption*{\footnotesize Jean-Marco}
+            \end{minipage}
+              \begin{minipage}[ht]{0.24\linewidth}
+              \centering
+                \includegraphics[width=0.61\linewidth, valign=t]{plots/pascal.jpg}
+                \caption*{\footnotesize Pascal}
             \end{minipage}
           \end{figure}
         \end{center}
