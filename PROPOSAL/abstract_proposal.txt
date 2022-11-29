@@ -1,6 +1,7 @@
 Modern analysis methods in Cosmic Ray physics rely on precise and efficent simulations of high-energy particles.
 To simulate the propagation of charged leptons and photons, the tool PROPOSAL has been developed. 
-It provides a 3D Monte Carlo simulation optimized for high-energy particles and usable in C++ and Python. 
+It provides a 3D Monte Carlo simulation optimized for high-energy particles, usable in C++ and Python. 
 
 We present the simulation framework PROPOSAL and a selection of its appications in astroparticle physics. 
-This includes neutrino observatories like the IceCube Neutrino Observatory, the imaging technique muography, and the usage of PROPOSAL in the new air shower simulation framework CORSIKA 8. Additionally, the latest study to estimate the impact of muon deflections on directional reconstructions using PROPOSAL studies is shown. 
+This includes neutrino observatories like the IceCube Neutrino Observatory, the imaging technique muography, and the usage of PROPOSAL in the new air shower simulation framework CORSIKA 8. 
+Additionally, the latest study to estimate the impact of muon deflections on directional reconstructions using PROPOSAL is shown. 
