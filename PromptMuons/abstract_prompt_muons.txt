@@ -1,9 +1,9 @@
-Extensive air showers arise due to particles coming from the Universe interacting with the atmosphere. In these high-energetic interactions,many particles of different types 
+Extensive air showers arise due to particles coming from the Universe interacting with the atmosphere. In these high-energetic interactions, many particles of different types 
 are produced.
-Since muons have a long range and livetime compared to other particles in the air shower, they are abundant even on the Earth's surface. These muons are detected with air shower detectors and also underground muon experiments.
+Since muons have a long lifetime and thus a long range compared to other particles in the air shower, they are abundant even on the Earth's surface. These muons are detected with air shower detectors and also underground muon experiments.
 The resulting muon flux is divided into a conventional and a prompt component. The prompt muons come from parent particles with a very short lifetime, causing the spectrum of the prompt 
-component to follow the primary spectrum. Particles with lifetimes larger than picoseconds live long enough to interact with the atmosphere what results in energy losses. Muons 
-from these particles are conventional and follow a harder energy spectrum.
+component nearly to follow the primary spectrum. Particles with lifetimes larger than picoseconds such as pions and kaons live long enough to interact with the atmosphere which results in energy losses. Muons 
+from decays of these particles are called conventional and follow a softer energy spectrum.
 
-First ideas to measure the prompt muon flux using the IceCube Neutrino Observatory are presented. New CORSIKA simulations will be performed in the future and re-weighting should be used to 
+Ideas to measure the prompt muon flux using the IceCube Neutrino Observatory are presented based on previous analyses. New CORSIKA simulations will be performed in the future and re-weighting should be used to 
 create several datasets with different scalings of the prompt component. At the end, an unfolding as well as a fit of the normalization will be performed. 
